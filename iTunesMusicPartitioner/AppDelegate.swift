@@ -54,11 +54,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                               action: #selector(AppDelegate.resume),
                               keyEquivalent: "r")
         
-        statusBarMenu.addItem(withTitle: "Previous",
+        statusBarMenu.addItem(withTitle: "←Previous",
                               action: #selector(AppDelegate.prev),
                               keyEquivalent: "a")
         
-        statusBarMenu.addItem(withTitle: "Next",
+        statusBarMenu.addItem(withTitle: "→Next",
                               action: #selector(AppDelegate.next),
                               keyEquivalent: "d")
         
