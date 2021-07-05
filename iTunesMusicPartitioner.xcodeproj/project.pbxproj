@@ -1,0 +1,594 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1AB5DE2C2693C26E007082C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB5DE2B2693C26E007082C8 /* AppDelegate.swift */; };
+		1AB5DE2E2693C26E007082C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB5DE2D2693C26E007082C8 /* ContentView.swift */; };
+		1AB5DE302693C270007082C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AB5DE2F2693C270007082C8 /* Assets.xcassets */; };
+		1AB5DE332693C270007082C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AB5DE322693C270007082C8 /* Preview Assets.xcassets */; };
+		1AB5DE362693C270007082C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AB5DE342693C270007082C8 /* Main.storyboard */; };
+		1AB5DE422693C270007082C8 /* iTunesMusicPartitionerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB5DE412693C270007082C8 /* iTunesMusicPartitionerTests.swift */; };
+		1AB5DE4D2693C270007082C8 /* iTunesMusicPartitionerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB5DE4C2693C270007082C8 /* iTunesMusicPartitionerUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1AB5DE3E2693C270007082C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AB5DE202693C26E007082C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AB5DE272693C26E007082C8;
+			remoteInfo = iTunesMusicPartitioner;
+		};
+		1AB5DE492693C270007082C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AB5DE202693C26E007082C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AB5DE272693C26E007082C8;
+			remoteInfo = iTunesMusicPartitioner;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1AB5DE282693C26E007082C8 /* iTunesMusicPartitioner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesMusicPartitioner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AB5DE2B2693C26E007082C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1AB5DE2D2693C26E007082C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1AB5DE2F2693C270007082C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1AB5DE322693C270007082C8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1AB5DE352693C270007082C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1AB5DE372693C270007082C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AB5DE382693C270007082C8 /* iTunesMusicPartitioner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iTunesMusicPartitioner.entitlements; sourceTree = "<group>"; };
+		1AB5DE3D2693C270007082C8 /* iTunesMusicPartitionerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTunesMusicPartitionerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AB5DE412693C270007082C8 /* iTunesMusicPartitionerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesMusicPartitionerTests.swift; sourceTree = "<group>"; };
+		1AB5DE432693C270007082C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AB5DE482693C270007082C8 /* iTunesMusicPartitionerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTunesMusicPartitionerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AB5DE4C2693C270007082C8 /* iTunesMusicPartitionerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesMusicPartitionerUITests.swift; sourceTree = "<group>"; };
+		1AB5DE4E2693C270007082C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1AB5DE252693C26E007082C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AB5DE3A2693C270007082C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AB5DE452693C270007082C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1AB5DE1F2693C26E007082C8 = {
+			isa = PBXGroup;
+			children = (
+				1AB5DE2A2693C26E007082C8 /* iTunesMusicPartitioner */,
+				1AB5DE402693C270007082C8 /* iTunesMusicPartitionerTests */,
+				1AB5DE4B2693C270007082C8 /* iTunesMusicPartitionerUITests */,
+				1AB5DE292693C26E007082C8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1AB5DE292693C26E007082C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1AB5DE282693C26E007082C8 /* iTunesMusicPartitioner.app */,
+				1AB5DE3D2693C270007082C8 /* iTunesMusicPartitionerTests.xctest */,
+				1AB5DE482693C270007082C8 /* iTunesMusicPartitionerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1AB5DE2A2693C26E007082C8 /* iTunesMusicPartitioner */ = {
+			isa = PBXGroup;
+			children = (
+				1AB5DE2B2693C26E007082C8 /* AppDelegate.swift */,
+				1AB5DE2D2693C26E007082C8 /* ContentView.swift */,
+				1AB5DE2F2693C270007082C8 /* Assets.xcassets */,
+				1AB5DE342693C270007082C8 /* Main.storyboard */,
+				1AB5DE372693C270007082C8 /* Info.plist */,
+				1AB5DE382693C270007082C8 /* iTunesMusicPartitioner.entitlements */,
+				1AB5DE312693C270007082C8 /* Preview Content */,
+			);
+			path = iTunesMusicPartitioner;
+			sourceTree = "<group>";
+		};
+		1AB5DE312693C270007082C8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1AB5DE322693C270007082C8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1AB5DE402693C270007082C8 /* iTunesMusicPartitionerTests */ = {
+			isa = PBXGroup;
+			children = (
+				1AB5DE412693C270007082C8 /* iTunesMusicPartitionerTests.swift */,
+				1AB5DE432693C270007082C8 /* Info.plist */,
+			);
+			path = iTunesMusicPartitionerTests;
+			sourceTree = "<group>";
+		};
+		1AB5DE4B2693C270007082C8 /* iTunesMusicPartitionerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1AB5DE4C2693C270007082C8 /* iTunesMusicPartitionerUITests.swift */,
+				1AB5DE4E2693C270007082C8 /* Info.plist */,
+			);
+			path = iTunesMusicPartitionerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1AB5DE272693C26E007082C8 /* iTunesMusicPartitioner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AB5DE512693C270007082C8 /* Build configuration list for PBXNativeTarget "iTunesMusicPartitioner" */;
+			buildPhases = (
+				1AB5DE242693C26E007082C8 /* Sources */,
+				1AB5DE252693C26E007082C8 /* Frameworks */,
+				1AB5DE262693C26E007082C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iTunesMusicPartitioner;
+			productName = iTunesMusicPartitioner;
+			productReference = 1AB5DE282693C26E007082C8 /* iTunesMusicPartitioner.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1AB5DE3C2693C270007082C8 /* iTunesMusicPartitionerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AB5DE542693C270007082C8 /* Build configuration list for PBXNativeTarget "iTunesMusicPartitionerTests" */;
+			buildPhases = (
+				1AB5DE392693C270007082C8 /* Sources */,
+				1AB5DE3A2693C270007082C8 /* Frameworks */,
+				1AB5DE3B2693C270007082C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1AB5DE3F2693C270007082C8 /* PBXTargetDependency */,
+			);
+			name = iTunesMusicPartitionerTests;
+			productName = iTunesMusicPartitionerTests;
+			productReference = 1AB5DE3D2693C270007082C8 /* iTunesMusicPartitionerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1AB5DE472693C270007082C8 /* iTunesMusicPartitionerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AB5DE572693C270007082C8 /* Build configuration list for PBXNativeTarget "iTunesMusicPartitionerUITests" */;
+			buildPhases = (
+				1AB5DE442693C270007082C8 /* Sources */,
+				1AB5DE452693C270007082C8 /* Frameworks */,
+				1AB5DE462693C270007082C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1AB5DE4A2693C270007082C8 /* PBXTargetDependency */,
+			);
+			name = iTunesMusicPartitionerUITests;
+			productName = iTunesMusicPartitionerUITests;
+			productReference = 1AB5DE482693C270007082C8 /* iTunesMusicPartitionerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1AB5DE202693C26E007082C8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = James;
+				TargetAttributes = {
+					1AB5DE272693C26E007082C8 = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					1AB5DE3C2693C270007082C8 = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 1AB5DE272693C26E007082C8;
+					};
+					1AB5DE472693C270007082C8 = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 1AB5DE272693C26E007082C8;
+					};
+				};
+			};
+			buildConfigurationList = 1AB5DE232693C26E007082C8 /* Build configuration list for PBXProject "iTunesMusicPartitioner" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1AB5DE1F2693C26E007082C8;
+			productRefGroup = 1AB5DE292693C26E007082C8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1AB5DE272693C26E007082C8 /* iTunesMusicPartitioner */,
+				1AB5DE3C2693C270007082C8 /* iTunesMusicPartitionerTests */,
+				1AB5DE472693C270007082C8 /* iTunesMusicPartitionerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1AB5DE262693C26E007082C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AB5DE362693C270007082C8 /* Main.storyboard in Resources */,
+				1AB5DE332693C270007082C8 /* Preview Assets.xcassets in Resources */,
+				1AB5DE302693C270007082C8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AB5DE3B2693C270007082C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AB5DE462693C270007082C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1AB5DE242693C26E007082C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AB5DE2E2693C26E007082C8 /* ContentView.swift in Sources */,
+				1AB5DE2C2693C26E007082C8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AB5DE392693C270007082C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AB5DE422693C270007082C8 /* iTunesMusicPartitionerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AB5DE442693C270007082C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AB5DE4D2693C270007082C8 /* iTunesMusicPartitionerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1AB5DE3F2693C270007082C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1AB5DE272693C26E007082C8 /* iTunesMusicPartitioner */;
+			targetProxy = 1AB5DE3E2693C270007082C8 /* PBXContainerItemProxy */;
+		};
+		1AB5DE4A2693C270007082C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1AB5DE272693C26E007082C8 /* iTunesMusicPartitioner */;
+			targetProxy = 1AB5DE492693C270007082C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1AB5DE342693C270007082C8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AB5DE352693C270007082C8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1AB5DE4F2693C270007082C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1AB5DE502693C270007082C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		1AB5DE522693C270007082C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iTunesMusicPartitioner/iTunesMusicPartitioner.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"iTunesMusicPartitioner/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iTunesMusicPartitioner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.james10424.iTunesMusicPartitioner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1AB5DE532693C270007082C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iTunesMusicPartitioner/iTunesMusicPartitioner.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"iTunesMusicPartitioner/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iTunesMusicPartitioner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.james10424.iTunesMusicPartitioner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1AB5DE552693C270007082C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = iTunesMusicPartitionerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.james10424.iTunesMusicPartitionerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iTunesMusicPartitioner.app/Contents/MacOS/iTunesMusicPartitioner";
+			};
+			name = Debug;
+		};
+		1AB5DE562693C270007082C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = iTunesMusicPartitionerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.james10424.iTunesMusicPartitionerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iTunesMusicPartitioner.app/Contents/MacOS/iTunesMusicPartitioner";
+			};
+			name = Release;
+		};
+		1AB5DE582693C270007082C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = iTunesMusicPartitionerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.james10424.iTunesMusicPartitionerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = iTunesMusicPartitioner;
+			};
+			name = Debug;
+		};
+		1AB5DE592693C270007082C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = iTunesMusicPartitionerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.james10424.iTunesMusicPartitionerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = iTunesMusicPartitioner;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1AB5DE232693C26E007082C8 /* Build configuration list for PBXProject "iTunesMusicPartitioner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AB5DE4F2693C270007082C8 /* Debug */,
+				1AB5DE502693C270007082C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1AB5DE512693C270007082C8 /* Build configuration list for PBXNativeTarget "iTunesMusicPartitioner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AB5DE522693C270007082C8 /* Debug */,
+				1AB5DE532693C270007082C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1AB5DE542693C270007082C8 /* Build configuration list for PBXNativeTarget "iTunesMusicPartitionerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AB5DE552693C270007082C8 /* Debug */,
+				1AB5DE562693C270007082C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1AB5DE572693C270007082C8 /* Build configuration list for PBXNativeTarget "iTunesMusicPartitionerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AB5DE582693C270007082C8 /* Debug */,
+				1AB5DE592693C270007082C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1AB5DE202693C26E007082C8 /* Project object */;
+}
