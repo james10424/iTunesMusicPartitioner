@@ -29,20 +29,20 @@ struct Playlist {
  The file must be in a valid JSON format and
  the schema of the JSON must look like this:
  {
-    playlistName1: {
-        concertName1: [
-            {name: songName, time: song time}
+    "playlistName1": {
+        "concertName1": [
+            {"name": "songName", "time": 10}
         ],
-        concertName2: [
-            {name: songName, time: song time}
+        "concertName2": [
+            {"name": "songName", "time": 100}
         ],
     },
-    playlistName2: {
-         concertName1: [
-             {name: songName, time: song time}
+    "playlistName2": {
+         "concertName1": [
+             {"name": "songName", "time": 5}
          ],
          concertName2: [
-             {name: songName, time: song time}
+             {"name": "songName", "time": 13}
          ],
     },
     ...
