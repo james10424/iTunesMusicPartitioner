@@ -23,6 +23,19 @@ struct Playlist {
     var iTunesIdx: Int?
 }
 
+struct JSONSongs: Decodable {
+    let name: String
+    let time: Int
+}
+struct JSONConcert: Decodable {
+    let name: String
+    let songs: [JSONSongs]
+}
+struct JSONPlaylist: Decodable {
+    let name: String
+    let concerts: [JSONConcert]
+}
+
 /**
  Reads the song list from a file name
  
@@ -48,7 +61,7 @@ struct Playlist {
     ...
  }
  */
-func read_songs(fname: String) -> [String: [String: [AnyObject]]]? {
+func read_songs(fname: String) -> [JSONPlaylist]? {
     var content: String
     do {
         content = try String(contentsOfFile: fname)
@@ -63,9 +76,10 @@ func read_songs(fname: String) -> [String: [String: [AnyObject]]]? {
         return nil
     }
     do {
-        let json_output = try JSONSerialization.jsonObject(with: data, options: [])
+//        let json_output = try JSONSerialization.jsonObject(with: data, options: [])
+        let json_output = try JSONDecoder().decode([JSONPlaylist].self, from: data)
         print(json_output)
-        return (json_output as! [String: [String: [AnyObject]]])
+        return json_output
     } catch {
         print("error parsing songs: \(error)")
         return nil

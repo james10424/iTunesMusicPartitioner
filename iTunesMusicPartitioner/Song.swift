@@ -82,7 +82,7 @@ func addConcert(
     parent: NSMenuItem,
     playlistName: String,
     concertName: String,
-    songs: [AnyObject]
+    songs: [JSONSongs]
 ) -> Concert {
     var menu_items: [Song] = []
     var _songs: [Song] = []
@@ -105,8 +105,8 @@ func addConcert(
         let item = Song(
             action: #selector(AppDelegate.play),
             keyEquivalent: "",
-            songName: song["name"] as! String,
-            songTime: song["time"] as! Int,
+            songName: song.name,
+            songTime: song.time,
             songIdx: i + 1,
             concertName: concertName,
             playlistName: playlistName
@@ -126,15 +126,17 @@ func addConcert(
 func addPlaylist(
     parent statusBarMenu: NSMenu,
     playlistName: String,
-    concerts: [String: [AnyObject]]
+    concerts: [JSONConcert]
 ) -> Playlist {
     var concertMappings: [String: Concert] = [:]
     var concertMenus: [NSMenuItem] = []
     
-    concerts.keys.forEach { concertName in
+    concerts.forEach { concert in
+        let concertName = concert.name
+        let songs = concert.songs
+
         print("Creating menu for concert \(concertName)")
 
-        let concert = concerts[concertName]!
         let concertMenu = NSMenuItem(
             title: concertName,
             action: nil,
@@ -145,7 +147,7 @@ func addPlaylist(
             parent: concertMenu,
             playlistName: playlistName,
             concertName: concertName,
-            songs: concert
+            songs: songs
         )
         concertMappings[concertName] = concertItems
         concertMenus.append(concertMenu)
@@ -162,7 +164,9 @@ func addAllSongs(
     // adds all songs to menu and return the mapping
     print("All songs:", all_songs_json as Any)
     var song_mappings: [String: Playlist] = [:]
-    for (playlistName, concerts) in all_songs_json ?? [:] {
+    for playlist in all_songs_json ?? [] {
+        let playlistName = playlist.name
+        let concerts = playlist.concerts
         print("Creating menu for playlist \(playlistName)")
         let mapping = addPlaylist(
             parent: statusBarMenu,
