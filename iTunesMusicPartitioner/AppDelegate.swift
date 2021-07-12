@@ -91,6 +91,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             curPlaylist?.title = "No Playlist"
             curConcert?.title = "No Concert"
             curSong?.title = "Not Playing"
+            prevBtn?.title = "\(prevText)"
+            nextBtn?.title = "\(nextText)"
             return
         }
         print("Now playing: \(curPlaying.name)")
@@ -99,7 +101,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         curSong?.title = curPlaying.name
         
         let cur_idx = curPlaying.idx
-        
         guard
             let curConcertSongs = itunes_manager.allSongs[curPlaying.playlistName]?.concerts[curPlaying.concertName]?.songs
         else {
@@ -108,8 +109,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if cur_idx > 0 {
             prevBtn!.title = "\(prevText) \(curConcertSongs[cur_idx - 1].name)"
         }
+        else {
+            prevBtn!.title = "\(prevText)"
+        }
         if cur_idx < curConcertSongs.count {
             nextBtn!.title = "\(nextText) \(curConcertSongs[cur_idx + 1].name)"
+        }
+        else {
+            nextBtn!.title = "\(nextText)"
         }
     }
 
