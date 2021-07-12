@@ -20,6 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var curPlaylist: NSMenuItem?
     var curConcert: NSMenuItem?
     var curSong: NSMenuItem?
+    var prevBtn: NSMenuItem?
+    var nextBtn: NSMenuItem?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let statusBarMenu = NSMenu()
@@ -54,13 +56,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                               action: #selector(AppDelegate.resume),
                               keyEquivalent: "r")
         
-        statusBarMenu.addItem(withTitle: "←Previous",
-                              action: #selector(AppDelegate.prev),
-                              keyEquivalent: "a")
+        prevBtn = NSMenuItem(
+            title: prevText,
+            action: #selector(AppDelegate.prev),
+            keyEquivalent: "a"
+        )
+        statusBarMenu.addItem(prevBtn!)
         
-        statusBarMenu.addItem(withTitle: "→Next",
-                              action: #selector(AppDelegate.next),
-                              keyEquivalent: "d")
+        nextBtn = NSMenuItem(
+            title: nextText,
+            action: #selector(AppDelegate.next),
+            keyEquivalent: "d"
+        )
+        statusBarMenu.addItem(nextBtn!)
         
         itunes_manager = iTunesManager(
             statusBarMenu,
@@ -89,6 +97,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         curPlaylist?.title = curPlaying.playlistName
         curConcert?.title = curPlaying.concertName
         curSong?.title = curPlaying.name
+        
+        let cur_idx = curPlaying.idx
+        
+        guard
+            let curConcertSongs = itunes_manager.allSongs[curPlaying.playlistName]?.concerts[curPlaying.concertName]?.songs
+        else {
+            return
+        }
+        if cur_idx > 0 {
+            prevBtn!.title = "\(prevText) \(curConcertSongs[cur_idx - 1].name)"
+        }
+        if cur_idx < curConcertSongs.count {
+            nextBtn!.title = "\(nextText) \(curConcertSongs[cur_idx + 1].name)"
+        }
     }
 
     @objc func toggle_repeat(_ sender: NSMenuItem) {

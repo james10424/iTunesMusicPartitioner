@@ -89,5 +89,7 @@ func read_songs(fname: String) -> [JSONPlaylist]? {
 let all_songs_json = read_songs(fname: "/Users/james/applescripts/songs.json")
 
 let titleText = "♫"
+let prevText = "←"
+let nextText = "→"
 
 let updateInterval = 5 // update every x seconds
