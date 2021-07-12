@@ -128,7 +128,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             return
         }
 
-        let time = i == 0 ? 0 : concert.songs[i - 1].time
+        let time = i == 0 ? 0 : concert.songs[i].time
             
         play_song(playlistName: playlistName, concertName: concertName, time: time)
     }
@@ -180,7 +180,11 @@ class iTunesManager : NSObject, NSMenuDelegate {
         else {
             return
         }
-        play_song(playlistName: playing.playlistName, concertName: playing.concertName, index: playing.idx - 1) // play_song will check
+        play_song(
+            playlistName: playing.playlistName,
+            concertName: playing.concertName,
+            index: playing.idx - 1
+        ) // idx starts with 1, but our list starts with 0,
     }
     
     /**
@@ -193,11 +197,16 @@ class iTunesManager : NSObject, NSMenuDelegate {
         else {
             return
         }
-        play_song(playlistName: playing.playlistName, concertName: playing.concertName, index: playing.idx + 1) // play_song will check
+        play_song(
+            playlistName: playing.playlistName,
+            concertName: playing.concertName,
+            index: playing.idx + 1
+        ) // idx starts with 1, but our list starts with 0
     }
 
     /**
      Get the currently playing song (song within a concert, not current track)
+     index will start from one
      */
     func current_song() -> Song? {
         // convert current timestamp to song index
@@ -214,12 +223,13 @@ class iTunesManager : NSObject, NSMenuDelegate {
         for song in cur_concert.songs {
             guard song.time <= time else {
                 // the last song before this time
+                print("Now playing: \(last!.idx) \(last!.name), \(last!.concertName), \(last!.playlistName)")
                 return last
             }
             last = song
         }
-        // must be the last one (starts with 1)
-        return cur_concert.songs[cur_concert.songs.count - 1]
+        // must be the last one
+        return cur_concert.songs[cur_concert.songs.endIndex]
     }
     
     /**
