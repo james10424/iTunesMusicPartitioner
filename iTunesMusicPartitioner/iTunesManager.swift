@@ -128,7 +128,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             return
         }
 
-        let time = i == 0 ? 0 : concert.songs[i].time
+        let time = concert.songs[i].time
             
         play_song(playlistName: playlistName, concertName: concertName, time: time)
     }
