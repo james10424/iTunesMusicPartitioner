@@ -91,5 +91,6 @@ let all_songs_json = read_songs(fname: "/Users/james/applescripts/songs.json")
 let titleText = "♫"
 let prevText = "←"
 let nextText = "→"
+let notPlayingText = "Not Playing"
 
 let updateInterval = 5 // update every x seconds

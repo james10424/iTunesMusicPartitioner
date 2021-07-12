@@ -31,21 +31,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusBarItem.button?.title = titleText
         statusBarItem.menu = statusBarMenu
 
+        // cur playing section
         curPlaylist = NSMenuItem(
-            title: "Not Playing", action: nil, keyEquivalent: ""
+            title: notPlayingText, action: nil, keyEquivalent: ""
         )
         statusBarMenu.addItem(curPlaylist!)
         curConcert = NSMenuItem(
-            title: "Not Playing", action: nil, keyEquivalent: ""
+            title: notPlayingText, action: nil, keyEquivalent: ""
         )
         statusBarMenu.addItem(curConcert!)
         curSong = NSMenuItem(
-            title: "Not Playing", action: nil, keyEquivalent: ""
+            title: notPlayingText, action: nil, keyEquivalent: ""
         )
         statusBarMenu.addItem(curSong!)
-        
+
         statusBarMenu.addItem(NSMenuItem.separator())
         
+        // control section
         let repeat_video = NSMenuItem(title: "Repeat wtih video",
                                       action: #selector(AppDelegate.toggle_repeat),
                                       keyEquivalent: "")
@@ -95,11 +97,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             nextBtn?.title = "\(nextText)"
             return
         }
-        print("Now playing: \(curPlaying.name)")
+        // set cur song display
         curPlaylist?.title = curPlaying.playlistName
         curConcert?.title = curPlaying.concertName
         curSong?.title = curPlaying.name
         
+        // set prev and next
         let cur_idx = curPlaying.idx
         guard
             let curConcertSongs = itunes_manager.allSongs[curPlaying.playlistName]?.concerts[curPlaying.concertName]?.songs
