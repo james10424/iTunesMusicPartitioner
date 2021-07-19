@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3BF57A26A5AC8800314013 /* sub_menu_playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A3BF57926A5AC8800314013 /* sub_menu_playlist.png */; };
+		1A3BF57C26A5ACDE00314013 /* sub_menu_song.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A3BF57B26A5ACDE00314013 /* sub_menu_song.png */; };
 		1AB5DE2C2693C26E007082C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB5DE2B2693C26E007082C8 /* AppDelegate.swift */; };
 		1AB5DE2E2693C26E007082C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB5DE2D2693C26E007082C8 /* ContentView.swift */; };
 		1AB5DE302693C270007082C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AB5DE2F2693C270007082C8 /* Assets.xcassets */; };
@@ -41,6 +43,9 @@
 
 /* Begin PBXFileReference section */
 		1A3BF57726A1ED7700314013 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1A3BF57826A5AC4800314013 /* main_ui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_ui.png; path = /Users/james/Nextcloud/programmation/github/iTunesMusicPartitioner/main_ui.png; sourceTree = "<absolute>"; };
+		1A3BF57926A5AC8800314013 /* sub_menu_playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sub_menu_playlist.png; sourceTree = "<group>"; };
+		1A3BF57B26A5ACDE00314013 /* sub_menu_song.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sub_menu_song.png; sourceTree = "<group>"; };
 		1AB5DE282693C26E007082C8 /* iTunesMusicPartitioner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesMusicPartitioner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5DE2B2693C26E007082C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AB5DE2D2693C26E007082C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +96,9 @@
 		1AB5DE1F2693C26E007082C8 = {
 			isa = PBXGroup;
 			children = (
+				1A3BF57B26A5ACDE00314013 /* sub_menu_song.png */,
+				1A3BF57926A5AC8800314013 /* sub_menu_playlist.png */,
+				1A3BF57826A5AC4800314013 /* main_ui.png */,
 				1A3BF57726A1ED7700314013 /* README.md */,
 				1AB5DE662693C6C5007082C8 /* LICENSE */,
 				1AB5DE2A2693C26E007082C8 /* iTunesMusicPartitioner */,
@@ -261,8 +269,10 @@
 			files = (
 				1AB5DE362693C270007082C8 /* Main.storyboard in Resources */,
 				1AB5DE332693C270007082C8 /* Preview Assets.xcassets in Resources */,
+				1A3BF57C26A5ACDE00314013 /* sub_menu_song.png in Resources */,
 				1AB5DE672693C6C5007082C8 /* LICENSE in Resources */,
 				1AB5DE302693C270007082C8 /* Assets.xcassets in Resources */,
+				1A3BF57A26A5AC8800314013 /* sub_menu_playlist.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

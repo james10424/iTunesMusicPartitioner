@@ -4,35 +4,26 @@ Partitions your music
 
 In action:
 
+Main UI:
+
+![main ui](main_ui.png)
+
+Playlist Menu:
+
+![playlist ui](sub_menu_playlist.png)
+
+Song Menu:
+
+![song ui](sub_menu_song.png)
 
 File format:
-The config file should be in `json`
+The config file should be in `json`, change `all_songs_json` in `Constants.swift` to point to your file.
 
 - It should have an array of playlists
-```json
-[
-  {
-    "name": "Playlist 1",
-    "concerts": [ ... ]
-  }
-]
-```
 - Each playlist contains an array of concerts (or tracks within a playlist)
-```json
-[
-  {
-    "name": "Playlist 1",
-    "concerts": [
-      {
-        "name": "Song 1",
-        "songs": [ ... ]
-      }
-    ]
-  }
-]
-```
-
 - Each concert contains an array of partitions.
+
+Example of the screenshot:
 ```json
 [
   {
@@ -53,4 +44,5 @@ The config file should be in `json`
       }
     ]
   }
+]
 ```
