@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A3BF57726A1ED7700314013 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1AB5DE282693C26E007082C8 /* iTunesMusicPartitioner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesMusicPartitioner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5DE2B2693C26E007082C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AB5DE2D2693C26E007082C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,6 +91,7 @@
 		1AB5DE1F2693C26E007082C8 = {
 			isa = PBXGroup;
 			children = (
+				1A3BF57726A1ED7700314013 /* README.md */,
 				1AB5DE662693C6C5007082C8 /* LICENSE */,
 				1AB5DE2A2693C26E007082C8 /* iTunesMusicPartitioner */,
 				1AB5DE402693C270007082C8 /* iTunesMusicPartitionerTests */,
