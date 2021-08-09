@@ -110,7 +110,7 @@ func notification(title: String, text: String, handler: ((NSAlert) -> Void)? = n
  */
 func askForFile(defaultFile: String?) -> String? {
     let dialog = NSOpenPanel()
-    dialog.title = "Choose a music config file (json)"
+    dialog.message = "Choose a music config file (json)"
     dialog.showsResizeIndicator = true
     dialog.showsHiddenFiles = false
     dialog.allowsMultipleSelection = false
@@ -172,3 +172,5 @@ let nextText = "→"
 let notPlayingText = "Not Playing"
 
 let updateInterval = 5 // update every x seconds
+
+let songMenuStartPos = 8

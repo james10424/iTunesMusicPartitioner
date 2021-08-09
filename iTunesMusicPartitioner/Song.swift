@@ -64,10 +64,15 @@ func addSubMenu(_ dropdownItem: NSMenuItem, _ items: [NSMenuItem]) {
  - Parameter title: the title of this sub menu
  - Parameter items: the menu items inside this menu
  */
-func addSubMenu(_ parent: NSMenu, _ title: String, _ items: [NSMenuItem]) -> NSMenuItem {
+func addSubMenu(_ parent: NSMenu, _ title: String, _ items: [NSMenuItem], _ idx: Int?) -> NSMenuItem {
     let dropdownItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
     addSubMenu(dropdownItem, items)
-    parent.addItem(dropdownItem)
+    if idx != nil {
+        parent.insertItem(dropdownItem, at: idx!)
+    }
+    else {
+        parent.addItem(dropdownItem)
+    }
     return dropdownItem
 }
 
@@ -153,7 +158,7 @@ func addPlaylist(
         concertMenus.append(concertMenu)
     }
     
-    let playlistMenu = addSubMenu(statusBarMenu, playlistName, concertMenus)
+    let playlistMenu = addSubMenu(statusBarMenu, playlistName, concertMenus, songMenuStartPos)
 
     return Playlist(name: playlistName, concerts: concertMappings, menu: playlistMenu)
 }

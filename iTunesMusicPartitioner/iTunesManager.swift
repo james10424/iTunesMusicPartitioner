@@ -22,15 +22,23 @@ class iTunesManager : NSObject, NSMenuDelegate {
     var curPlaying: Song?
     var songChanged: Selector
     var updateTimer: DispatchSourceTimer?
+    var statusBarMenu: NSMenu?
     
     init(_ statusBarMenu: NSMenu, _ songChanged: Selector) {
         self.prev_state = "Playing"
         self.cur_song_name = ""
         self.iTunesPlayer = SBApplication(bundleIdentifier: "com.apple.iTunes")!
         self.songChanged = songChanged
+        self.statusBarMenu = statusBarMenu
         super.init()
 
         allSongs = addAllSongs(parent: statusBarMenu)
+    }
+    
+    deinit {
+        for (_, playlists) in allSongs {
+            statusBarMenu?.removeItem(playlists.menu)
+        }
     }
     
     func updateCurPlaying() {

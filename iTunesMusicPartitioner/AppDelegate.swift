@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var statusBarItem: NSStatusItem!
     var itunes_manager: iTunesManager!
     var should_repeat: Bool = true
-    
+    var statusBarMenu: NSMenu?
     var curPlaylist: NSMenuItem?
     var curConcert: NSMenuItem?
     var curSong: NSMenuItem?
@@ -24,37 +24,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var nextBtn: NSMenuItem?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let statusBarMenu = NSMenu()
+        statusBarMenu = NSMenu()
 
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         statusBarItem.button?.title = titleText
         statusBarItem.menu = statusBarMenu
-
+        
         // cur playing section
         curPlaylist = NSMenuItem(
             title: notPlayingText, action: nil, keyEquivalent: ""
         )
-        statusBarMenu.addItem(curPlaylist!)
+        statusBarMenu!.addItem(curPlaylist!)
         curConcert = NSMenuItem(
             title: notPlayingText, action: nil, keyEquivalent: ""
         )
-        statusBarMenu.addItem(curConcert!)
+        statusBarMenu!.addItem(curConcert!)
         curSong = NSMenuItem(
             title: notPlayingText, action: nil, keyEquivalent: ""
         )
-        statusBarMenu.addItem(curSong!)
+        statusBarMenu!.addItem(curSong!)
 
-        statusBarMenu.addItem(NSMenuItem.separator())
+        statusBarMenu!.addItem(NSMenuItem.separator())
         
         // control section
         let repeat_video = NSMenuItem(title: "Repeat wtih video",
                                       action: #selector(AppDelegate.toggle_repeat),
                                       keyEquivalent: "")
         repeat_video.state = .on // on by default
-        statusBarMenu.addItem(repeat_video)
+        statusBarMenu!.addItem(repeat_video)
         
-        statusBarMenu.addItem(withTitle: "Resume",
+        statusBarMenu!.addItem(withTitle: "Resume",
                               action: #selector(AppDelegate.resume),
                               keyEquivalent: "r")
         
@@ -63,23 +63,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             action: #selector(AppDelegate.prev),
             keyEquivalent: "a"
         )
-        statusBarMenu.addItem(prevBtn!)
+        statusBarMenu!.addItem(prevBtn!)
         
         nextBtn = NSMenuItem(
             title: nextText,
             action: #selector(AppDelegate.next),
             keyEquivalent: "d"
         )
-        statusBarMenu.addItem(nextBtn!)
+        statusBarMenu!.addItem(nextBtn!)
         
         itunes_manager = iTunesManager(
-            statusBarMenu,
+            statusBarMenu!,
             #selector(AppDelegate.songChanged)
         ) // song menus will be added inside
 
-        statusBarMenu.addItem(NSMenuItem.separator())
-        statusBarMenu.addItem(withTitle: "Configure", action: #selector(AppDelegate.reload_config), keyEquivalent: "")
-        statusBarMenu.addItem(withTitle: "Quit", action: #selector(AppDelegate.quit), keyEquivalent: "q")
+        statusBarMenu!.addItem(NSMenuItem.separator())
+        statusBarMenu!.addItem(withTitle: "Configure", action: #selector(AppDelegate.reload_config), keyEquivalent: "")
+        statusBarMenu!.addItem(withTitle: "Quit", action: #selector(AppDelegate.quit), keyEquivalent: "q")
         
         itunes_manager.startObserving()
         statusBarItem.menu?.delegate = itunes_manager
@@ -155,7 +155,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     @objc func reload_config() {
-        all_songs_json = readConfig(selectFile: true)
+        guard
+            let menu = statusBarMenu,
+            let songs = readConfig(selectFile: true)
+        else { return }
+        all_songs_json = songs
+        itunes_manager = iTunesManager(
+            menu,
+            #selector(AppDelegate.songChanged)
+        ) // song menus will be added inside
+        statusBarItem.menu?.delegate = itunes_manager
     }
 }
 
