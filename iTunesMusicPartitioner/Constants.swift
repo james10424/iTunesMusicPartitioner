@@ -76,7 +76,6 @@ func read_songs(fname: String) -> [JSONPlaylist]? {
         return nil
     }
     do {
-//        let json_output = try JSONSerialization.jsonObject(with: data, options: [])
         let json_output = try JSONDecoder().decode([JSONPlaylist].self, from: data)
         print(json_output)
         return json_output
@@ -86,7 +85,86 @@ func read_songs(fname: String) -> [JSONPlaylist]? {
     }
 }
 
-let all_songs_json = read_songs(fname: "/Users/james/applescripts/songs.json")
+/**
+ Displays a dialog, optional handler to handle what happens with the window and key press
+ */
+func notification(title: String, text: String, handler: ((NSAlert) -> Void)? = nil) {
+    let alert = NSAlert()
+    alert.messageText = title
+    alert.informativeText = text
+    alert.alertStyle = .warning
+
+    if handler != nil {
+        handler!(alert)
+    }
+    else {
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
+    }
+}
+
+/**
+ Ask for a file path, optional pre-selected file
+ 
+ Return the file name if successful
+ */
+func askForFile(defaultFile: String?) -> String? {
+    let dialog = NSOpenPanel()
+    dialog.title = "Choose a music config file (json)"
+    dialog.showsResizeIndicator = true
+    dialog.showsHiddenFiles = false
+    dialog.allowsMultipleSelection = false
+    dialog.canChooseDirectories = false
+    dialog.allowedFileTypes = ["json"]
+    if defaultFile != nil {
+        dialog.directoryURL = NSURL.fileURL(withPath: defaultFile!)
+    }
+    if dialog.runModal() == .OK {
+        return dialog.url?.path
+    }
+    return nil
+}
+
+/**
+ Reads the config from storage, or select a new file. If no previously saved storage, select a new file
+ 
+ returns the object read if success
+ 
+ The config has the following format:
+ [
+    {
+        "name": "window name",
+        "x": 2561,
+        "y": -1093,
+        "width": 1079,
+        "height": 614
+    },
+    ...
+ ]
+ */
+func readConfig(selectFile: Bool) -> [JSONPlaylist]? {
+    let defaults = UserDefaults.standard
+    var fname: String?
+    let defaultFile = defaults.string(forKey: "songConfig")
+    if selectFile || defaultFile == nil {
+        fname = askForFile(defaultFile: defaultFile)
+    }
+    else {
+        fname = defaultFile
+    }
+    guard fname != nil else {
+        notification(title: "This doesn't work", text: "You haven't selected a file")
+        return nil
+    }
+    guard let songs = read_songs(fname: fname!) else {
+        notification(title: "Invalid config", text: "The config file you supplied is invalid")
+        return nil
+    }
+    defaults.set(fname, forKey: "songConfig")
+    return songs
+}
+
+var all_songs_json = readConfig(selectFile: false) //read_songs(fname: "/Users/james/applescripts/songs.json")
 
 let titleText = "♫"
 let prevText = "←"

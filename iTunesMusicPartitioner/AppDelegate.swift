@@ -78,6 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         ) // song menus will be added inside
 
         statusBarMenu.addItem(NSMenuItem.separator())
+        statusBarMenu.addItem(withTitle: "Configure", action: #selector(AppDelegate.reload_config), keyEquivalent: "")
         statusBarMenu.addItem(withTitle: "Quit", action: #selector(AppDelegate.quit), keyEquivalent: "q")
         
         itunes_manager.startObserving()
@@ -151,6 +152,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @objc func play(w: Song) {
         itunes_manager.play_song(playlistName: w.playlistName, concertName: w.concertName, time: w.time)
+    }
+    
+    @objc func reload_config() {
+        all_songs_json = readConfig(selectFile: true)
     }
 }
 
