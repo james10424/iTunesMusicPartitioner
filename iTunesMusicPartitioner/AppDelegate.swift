@@ -115,7 +115,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         else {
             prevBtn!.title = "\(prevText)"
         }
-        if cur_idx < curConcertSongs.count {
+        if cur_idx + 1 < curConcertSongs.count {
             nextBtn!.title = "\(nextText) \(curConcertSongs[cur_idx + 1].name)"
         }
         else {

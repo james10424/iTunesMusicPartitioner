@@ -228,7 +228,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             last = song
         }
         // must be the last one
-        return cur_concert.songs[cur_concert.songs.endIndex]
+        return cur_concert.songs[cur_concert.songs.endIndex - 1]
     }
     
     /**
