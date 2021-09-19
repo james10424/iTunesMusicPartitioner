@@ -135,10 +135,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     @objc func prev() {
+        print("Playing prev")
         itunes_manager.play_prev()
     }
     
     @objc func next() {
+        print("Playing next")
         itunes_manager.play_next()
     }
 

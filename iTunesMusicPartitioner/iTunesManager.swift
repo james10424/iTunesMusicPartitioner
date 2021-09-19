@@ -33,6 +33,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
         super.init()
 
         allSongs = addAllSongs(parent: statusBarMenu)
+        startObserving()
     }
     
     deinit {
@@ -160,7 +161,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
         let tracks = getTracks() as! [iTunesTrack]
 
         guard
-            concertIdx < tracks.count
+            concertIdx <= tracks.count
         else {
             return
         }
