@@ -168,9 +168,8 @@ var all_songs_json = readConfig(selectFile: false) //read_songs(fname: "/Users/j
 
 let titleText = "♫"
 let prevText = "←"
+let replayText = "⟳"
 let nextText = "→"
 let notPlayingText = "Not Playing"
 
 let updateInterval = 5 // update every x seconds
-
-let songMenuStartPos = 8

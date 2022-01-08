@@ -12,6 +12,7 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
+    var itemsBeforeSongs: Int!
     var window: NSWindow!
     var statusBarItem: NSStatusItem!
     var itunes_manager: iTunesManager!
@@ -22,6 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var curSong: NSMenuItem?
     var prevBtn: NSMenuItem?
     var nextBtn: NSMenuItem?
+    var replayBtn: NSMenuItem?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBarMenu = NSMenu()
@@ -48,15 +50,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusBarMenu!.addItem(NSMenuItem.separator())
         
         // control section
-        let repeat_video = NSMenuItem(title: "Repeat wtih video",
-                                      action: #selector(AppDelegate.toggle_repeat),
-                                      keyEquivalent: "")
-        repeat_video.state = .on // on by default
+        let repeat_video = NSMenuItem(
+            title: "Repeat wtih video",
+            action: #selector(AppDelegate.toggle_repeat),
+            keyEquivalent: ""
+        )
+        repeat_video.state = .off // off by default
         statusBarMenu!.addItem(repeat_video)
         
-        statusBarMenu!.addItem(withTitle: "Resume",
-                              action: #selector(AppDelegate.resume),
-                              keyEquivalent: "r")
+        statusBarMenu!.addItem(
+            withTitle: "Resume",
+            action: #selector(AppDelegate.resume),
+            keyEquivalent: "r"
+        )
         
         prevBtn = NSMenuItem(
             title: prevText,
@@ -64,6 +70,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             keyEquivalent: "a"
         )
         statusBarMenu!.addItem(prevBtn!)
+
+        replayBtn = NSMenuItem(
+            title: replayText,
+            action: #selector(AppDelegate.replay),
+            keyEquivalent: "w"
+        )
+        statusBarMenu!.addItem(replayBtn!)
         
         nextBtn = NSMenuItem(
             title: nextText,
@@ -72,8 +85,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         )
         statusBarMenu!.addItem(nextBtn!)
         
+        statusBarMenu!.addItem(NSMenuItem.separator())
+        
+        itemsBeforeSongs = statusBarMenu!.items.count
+        
         itunes_manager = iTunesManager(
             statusBarMenu!,
+            itemsBeforeSongs!,
             #selector(AppDelegate.songChanged)
         ) // song menus will be added inside
 
@@ -96,6 +114,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             curSong?.title = "Not Playing"
             prevBtn?.title = "\(prevText)"
             nextBtn?.title = "\(nextText)"
+            replayBtn?.title = "\(replayText)"
             return
         }
         // set cur song display
@@ -122,6 +141,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         else {
             nextBtn!.title = "\(nextText)"
         }
+        replayBtn!.title = "\(replayText) \(curPlaying.name)"
     }
 
     @objc func toggle_repeat(_ sender: NSMenuItem) {
@@ -137,6 +157,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func prev() {
         print("Playing prev")
         itunes_manager.play_prev()
+    }
+
+    @objc func replay() {
+        print("Replaying current")
+        itunes_manager.restart_current()
     }
     
     @objc func next() {
@@ -164,6 +189,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         all_songs_json = songs
         itunes_manager = iTunesManager(
             menu,
+            itemsBeforeSongs,
             #selector(AppDelegate.songChanged)
         ) // song menus will be added inside
         statusBarItem.menu?.delegate = itunes_manager

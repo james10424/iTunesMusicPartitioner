@@ -131,7 +131,8 @@ func addConcert(
 func addPlaylist(
     parent statusBarMenu: NSMenu,
     playlistName: String,
-    concerts: [JSONConcert]
+    concerts: [JSONConcert],
+    _ insertAfter: Int
 ) -> Playlist {
     var concertMappings: [String: Concert] = [:]
     var concertMenus: [NSMenuItem] = []
@@ -158,13 +159,14 @@ func addPlaylist(
         concertMenus.append(concertMenu)
     }
     
-    let playlistMenu = addSubMenu(statusBarMenu, playlistName, concertMenus, songMenuStartPos)
+    let playlistMenu = addSubMenu(statusBarMenu, playlistName, concertMenus, insertAfter)
 
     return Playlist(name: playlistName, concerts: concertMappings, menu: playlistMenu)
 }
 
 func addAllSongs(
-    parent statusBarMenu: NSMenu
+    parent statusBarMenu: NSMenu,
+    _ insertAfter: Int
 ) -> [String: Playlist] {
     // adds all songs to menu and return the mapping
     print("All songs:", all_songs_json as Any)
@@ -176,7 +178,8 @@ func addAllSongs(
         let mapping = addPlaylist(
             parent: statusBarMenu,
             playlistName: playlistName,
-            concerts: concerts
+            concerts: concerts,
+            insertAfter
         )
         song_mappings[playlistName] = mapping
     }

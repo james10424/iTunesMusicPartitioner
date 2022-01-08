@@ -17,14 +17,14 @@ class iTunesManager : NSObject, NSMenuDelegate {
     var prev_state: String
     var cur_song_name: String
     var iTunesPlayer: iTunesApplication
-    var toogleResume: Bool = true
+    var toogleResume: Bool = false
     var allSongs: [String: Playlist] = [:] // will be added
     var curPlaying: Song?
     var songChanged: Selector
     var updateTimer: DispatchSourceTimer?
     var statusBarMenu: NSMenu?
     
-    init(_ statusBarMenu: NSMenu, _ songChanged: Selector) {
+    init(_ statusBarMenu: NSMenu, _ insertAfter: Int, _ songChanged: Selector) {
         self.prev_state = "Playing"
         self.cur_song_name = ""
         self.iTunesPlayer = SBApplication(bundleIdentifier: "com.apple.iTunes")!
@@ -32,7 +32,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
         self.statusBarMenu = statusBarMenu
         super.init()
 
-        allSongs = addAllSongs(parent: statusBarMenu)
+        allSongs = addAllSongs(parent: statusBarMenu, insertAfter)
         startObserving()
     }
     
@@ -209,6 +209,24 @@ class iTunesManager : NSObject, NSMenuDelegate {
             playlistName: playing.playlistName,
             concertName: playing.concertName,
             index: playing.idx + 1
+        ) // idx starts with 1, but our list starts with 0
+    }
+    
+
+    /**
+     Play the current song from the start, if there is any
+     */
+    func restart_current() {
+        curPlaying = current_song()
+        guard
+            let playing = curPlaying
+        else {
+            return
+        }
+        play_song(
+            playlistName: playing.playlistName,
+            concertName: playing.concertName,
+            index: playing.idx
         ) // idx starts with 1, but our list starts with 0
     }
 
