@@ -153,6 +153,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             let curTrackIdx = iTunesPlayer.currentTrack?.index,
             let track_tobe_played = find_itunes_concert(concertName: concertName, playlist: playlist),
             let concertIdx = track_tobe_played.index,
+            let revealTrack = track_tobe_played.reveal,
             let setPlayerPosition = iTunesPlayer.setPlayerPosition
         else {
             return
@@ -173,6 +174,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
                 return
             }
             play(false)
+            revealTrack()
         }
         // if the current song is the playing one, just set the time
         setPlayerPosition(Double(t))
