@@ -18,6 +18,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
     var cur_song_name: String
     var iTunesPlayer: iTunesApplication
     var toogleResume: Bool = false
+    var toggleFit: Bool = true
     var allSongs: [String: Playlist] = [:] // will be added
     var curPlaying: Song?
     var songChanged: Selector
@@ -178,6 +179,13 @@ class iTunesManager : NSObject, NSMenuDelegate {
         }
         // if the current song is the playing one, just set the time
         setPlayerPosition(Double(t))
+        // the song might not be the right size, we try to fit it
+        if (toggleFit) {
+            // there might be lag when a music started
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.fit_to_screen()
+            }
+        }
     }
     
     /**
@@ -316,6 +324,177 @@ class iTunesManager : NSObject, NSMenuDelegate {
         return playlists[idx]
     }
     
+    func getWindowTitle(_ window: AXUIElement) -> String? {
+        var titleRef: AnyObject?
+        let err = AXUIElementCopyAttributeValue(window, kAXTitleAttribute as CFString, &titleRef)
+        guard err == .success else {
+            return nil
+        }
+        return titleRef as? String
+    }
+    
+    func setWindowBounds(_ window: AXUIElement, x: Int, y: Int, width: Int, height: Int) {
+        var point = CGPoint(x: x, y: y)
+        let position = AXValueCreate(
+            AXValueType(rawValue: kAXValueCGPointType)!,
+            &point
+        )!
+        let pos_err = AXUIElementSetAttributeValue(
+            window,
+            kAXPositionAttribute as CFString,
+            position
+        )
+        if pos_err != .success {
+            print(pos_err)
+            return
+        }
+        var rect = CGSize(width: width, height: height)
+        let size = AXValueCreate(
+            AXValueType(rawValue: kAXValueCGSizeType)!,
+            &rect
+        )!
+        let size_err = AXUIElementSetAttributeValue(
+            window,
+            kAXSizeAttribute as CFString,
+            size
+        )
+        if size_err != .success {
+            print(size_err)
+            return
+        }
+    }
+
+    func getWindowSize(windowRef: AXUIElement) -> CGSize? {
+        var sizeRef: CFTypeRef?
+        let err = AXUIElementCopyAttributeValue(
+            windowRef,
+            kAXSizeAttribute as CFString,
+            &sizeRef
+        )
+        guard err == .success else {
+            print(err.rawValue)
+            return nil
+        }
+        var size: CGSize = CGSize()
+        let success = AXValueGetValue(
+            sizeRef as! AXValue,
+            AXValueType(rawValue: kAXValueCGSizeType)!,
+            &size
+        )
+        if !success {
+            print("Failed to convert size data")
+            return nil
+        }
+
+        return size
+    }
+
+    func getWindowPosition(windowRef: AXUIElement) -> CGPoint? {
+        var positionRef: CFTypeRef?
+        let err = AXUIElementCopyAttributeValue(
+            windowRef,
+            kAXPositionAttribute as CFString,
+            &positionRef
+        )
+        guard err == .success else {
+            print(err.rawValue)
+            return nil
+        }
+        var position: CGPoint = CGPoint()
+        let success = AXValueGetValue(
+            positionRef as! AXValue,
+            AXValueType(rawValue: kAXValueCGPointType)!,
+            &position
+        )
+        if !success {
+            print("Failed to convert position data")
+            return nil
+        }
+
+        return position
+    }
+
+    func get_ax_window() -> AXUIElement? {
+        // get the ax window to set bounds
+        let running_apps = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.iTunes")
+        let pid = running_apps[0].processIdentifier
+        // get handle
+        let ui_app = AXUIElementCreateApplication(pid)
+        var value: AnyObject?
+        let err = AXUIElementCopyAttributeValue(
+            ui_app,
+            kAXWindowsAttribute as CFString,
+            &value
+        ) as AXError
+
+        guard err == .success else {
+            print(err)
+            return nil
+        }
+        // filter window with this name
+        guard
+            let windows = value as? [AXUIElement],
+            windows.count > 0
+        else {
+            print("No windows found for itunes")
+            return nil
+        }
+        // filter window that is not iTunes, then it must be the music
+        let non_itunes_windows = windows.filter { window in
+            return getWindowTitle(window) != "iTunes"
+        }
+        guard non_itunes_windows.count > 0 else {
+            print("No music window")
+            return nil
+        }
+        return non_itunes_windows[0]
+    }
+
+    func fit_x(_ cur_width: Int) -> Int {
+        // this is where x should be fitted
+        // difference between their mid point
+        let width_diff = (-1024 + Int(cur_width)) / 2
+        return -1075 - width_diff
+    }
+
+    func fit_y(_ cur_height: Int) -> Int {
+        // this is where x should be fitted
+        // difference between their mid point
+        let height_diff = (745 - Int(cur_height)) / 2
+        return 1463 + height_diff
+    }
+
+    func fit_to_screen() {
+        guard let window = get_ax_window() else { return }
+        guard var size = getWindowSize(windowRef: window) else { return }
+        guard let pos = getWindowPosition(windowRef: window) else { return }
+        // check diff to see if it's already fitted
+        if fit_x(Int(size.width)) == Int(pos.x) && fit_y(Int(size.height)) == Int(pos.y) {
+            print("Already fitted")
+            return
+        }
+        // first we go to the top right corner, expand the window
+        setWindowBounds(
+            window,
+            x: -1075,
+            y: 1463,
+            width: 1024,
+            height: 745
+        )
+        // then we get the actual size, then move to the middle
+        size = getWindowSize(windowRef: window)!
+
+        // screen left: -1075, screen right: -51
+        // screen top: 1463, screen bottom: 2208 (minus the top status bar)
+        setWindowBounds(
+            window,
+            x: fit_x(Int(size.width)),
+            y: fit_y(Int(size.height)),
+            width: Int(size.width),
+            height: Int(size.height)
+        )
+    }
+    
     /**
      Resumes the video playback with video
      
@@ -351,6 +530,12 @@ class iTunesManager : NSObject, NSMenuDelegate {
      When the play state of current music changes, determine whether we need to resume the video playback
      */
     @objc func observeMusic(_ n: NSNotification) {
+        if (toggleFit) {
+            // there might be lag when a music started
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.fit_to_screen()
+            }
+        }
         let cur_state = n.userInfo?["Player State"] as! String
         if cur_state == "Playing" {
             let song = n.userInfo?["Name"] as? String

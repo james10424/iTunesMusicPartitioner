@@ -50,6 +50,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusBarMenu!.addItem(NSMenuItem.separator())
         
         // control section
+        let fit_to_screen = NSMenuItem(
+            title: "Fit to Screen",
+            action: #selector(AppDelegate.toggle_fit),
+            keyEquivalent: ""
+        )
+        fit_to_screen.state = .on // on by default
+        statusBarMenu!.addItem(fit_to_screen)
+
+
         let repeat_video = NSMenuItem(
             title: "Repeat wtih video",
             action: #selector(AppDelegate.toggle_repeat),
@@ -57,7 +66,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         )
         repeat_video.state = .off // off by default
         statusBarMenu!.addItem(repeat_video)
-        
+
+        statusBarMenu!.addItem(
+            withTitle: "Do \"Fit to Screen\"",
+            action: #selector(AppDelegate.fit_to_screen),
+            keyEquivalent: ""
+        )
+
         statusBarMenu!.addItem(
             withTitle: "Resume",
             action: #selector(AppDelegate.resume),
@@ -154,6 +169,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         itunes_manager.toogleResume = !itunes_manager.toogleResume
     }
     
+    @objc func toggle_fit(_ sender: NSMenuItem) {
+        if itunes_manager.toggleFit {
+            sender.state = .off
+        }
+        else {
+            sender.state = .on
+        }
+        itunes_manager.toggleFit = !itunes_manager.toggleFit
+    }
+    
     @objc func prev() {
         print("Playing prev")
         itunes_manager.play_prev()
@@ -175,6 +200,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     @objc func resume() {
         itunes_manager.resume()
+    }
+    
+    @objc func fit_to_screen() {
+        itunes_manager.fit_to_screen()
     }
     
     @objc func play(w: Song) {
