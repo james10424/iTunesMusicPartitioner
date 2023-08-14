@@ -28,7 +28,10 @@ class iTunesManager : NSObject, NSMenuDelegate {
     init(_ statusBarMenu: NSMenu, _ insertAfter: Int, _ songChanged: Selector) {
         self.prev_state = "Playing"
         self.cur_song_name = ""
-        self.iTunesPlayer = SBApplication(bundleIdentifier: "com.apple.iTunes")!
+        let running_apps = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.iTunes")
+        let pid = running_apps[0].processIdentifier
+//        self.iTunesPlayer = SBApplication(bundleIdentifier: "com.launcher.iTunes")!
+        self.iTunesPlayer = SBApplication(processIdentifier: pid)!
         self.songChanged = songChanged
         self.statusBarMenu = statusBarMenu
         super.init()
@@ -557,8 +560,8 @@ class iTunesManager : NSObject, NSMenuDelegate {
         DistributedNotificationCenter.default().addObserver(
             self,
             selector: #selector(observeMusic),
-            name: NSNotification.Name.init("com.apple.iTunes.playerInfo"),
-            object: "com.apple.iTunes.player"
+            name: NSNotification.Name.init("com.launcher.iTunes.playerInfo"),
+            object: "com.launcher.iTunes.player"
         )
         updateCurPlaying()
     }
