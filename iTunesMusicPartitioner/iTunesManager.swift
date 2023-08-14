@@ -431,6 +431,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
         ) as AXError
 
         guard err == .success else {
+            notification(title: "Error getting iTunes window", text: "\(err)")
             print(err)
             return nil
         }
