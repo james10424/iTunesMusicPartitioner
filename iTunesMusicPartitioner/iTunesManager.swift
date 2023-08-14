@@ -560,8 +560,8 @@ class iTunesManager : NSObject, NSMenuDelegate {
         DistributedNotificationCenter.default().addObserver(
             self,
             selector: #selector(observeMusic),
-            name: NSNotification.Name.init("com.launcher.iTunes.playerInfo"),
-            object: "com.launcher.iTunes.player"
+            name: NSNotification.Name.init("com.apple.iTunes.playerInfo"),
+            object: "com.apple.iTunes.player"
         )
         updateCurPlaying()
     }
