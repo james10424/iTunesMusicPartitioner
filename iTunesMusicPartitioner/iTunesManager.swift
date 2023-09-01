@@ -473,8 +473,8 @@ class iTunesManager : NSObject, NSMenuDelegate {
         guard var size = getWindowSize(windowRef: window) else { return }
         guard let pos = getWindowPosition(windowRef: window) else { return }
         // check diff to see if it's already fitted
-        if fit_x(Int(size.width)) == Int(pos.x) && fit_y(Int(size.height)) == Int(pos.y) {
-            print("Already fitted")
+        if fit_x(Int(size.width)) - Int(pos.x) <= 5 && fit_y(Int(size.height)) - Int(pos.y) <= 5 {
+            print("Already fitted within error")
             return
         }
         // first we go to the top right corner, expand the window
