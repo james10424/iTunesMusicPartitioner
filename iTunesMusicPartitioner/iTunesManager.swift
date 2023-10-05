@@ -144,16 +144,55 @@ class iTunesManager : NSObject, NSMenuDelegate {
         let time = concert.songs[i].time
         play_song(playlistName: playlistName, concertName: concertName, time: time)
     }
+
+    func double_click() {
+        guard let window = get_ax_window() else { return }
+        var itemList: CFTypeRef?
+        let listRole = kAXOutlineRole as CFString
+        
+        if AXUIElementCopyAttributeValue(window, listRole, &itemList) != .success {
+            print("cannot copy item list")
+            return
+        }
+        var highlightedItem: CFTypeRef?
+        if AXUIElementCopyAttributeValue(itemList as! AXUIElement, kAXFocusedUIElementAttribute as CFString, &highlightedItem) != .success {
+            print("cannot copy highlighted item")
+            return
+        }
+        let position: CGPoint = CGPoint(x: 0, y: 0)
+        let doubleClickPosition = NSPointToCGPoint(NSMakePoint(position.x + 5, position.y + 5)) // Offset by a few pixels for the second click
+
+        // Create mouse events for a double-click
+        let downEvent = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition: doubleClickPosition, mouseButton: .left)
+        let upEvent = CGEvent(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: doubleClickPosition, mouseButton: .left)
+        let doubleClick = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition: doubleClickPosition, mouseButton: .left)
+
+        // Post the events to simulate a double-click
+        downEvent?.post(tap: .cghidEventTap)
+        upEvent?.post(tap: .cghidEventTap)
+        doubleClick?.post(tap: .cghidEventTap)
+    }
     
+    func send_enter() {
+        let running_apps = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.iTunes")
+        let pid = running_apps[0].processIdentifier
+        let enter: UInt16 = 0x24
+        let src = CGEventSource(stateID: .hidSystemState)
+        let keydown = CGEvent(keyboardEventSource: src, virtualKey: enter, keyDown: true)
+        let keyup = CGEvent(keyboardEventSource: src, virtualKey: enter, keyDown: false)
+        keydown?.postToPid(pid)
+        keyup?.postToPid(pid)
+    }
+
     /**
      Play this song given all the details
      */
     func play_song(playlistName: String, concertName: String, time t: Int) {
         guard
             let playlist = find_itunes_playlist(playlistName: playlistName),
-            let playlistPlay = playlist.playOnce,
+//            let playlistPlay = playlist.playOnce,
             let getTracks = playlist.tracks,
-            let stop = iTunesPlayer.stop,
+//            let stop = iTunesPlayer.stop,
             let curTrackIdx = iTunesPlayer.currentTrack?.index,
             let track_tobe_played = find_itunes_concert(concertName: concertName, playlist: playlist),
             let concertIdx = track_tobe_played.index,
@@ -172,13 +211,8 @@ class iTunesManager : NSObject, NSMenuDelegate {
         }
 
         if curTrackIdx != concertIdx {
-            stop()
-            playlistPlay(false)
-            guard let play = tracks[concertIdx - 1].playOnce else {
-                return
-            }
-            play(false)
             revealTrack()
+            send_enter()
         }
         // if the current song is the playing one, just set the time
         setPlayerPosition(Double(t))
@@ -431,8 +465,8 @@ class iTunesManager : NSObject, NSMenuDelegate {
         ) as AXError
 
         guard err == .success else {
-            notification(title: "Error getting iTunes window", text: "\(err)")
-            print(err)
+//            notification(title: "Error getting iTunes window", text: "\(err)")
+            print(err.rawValue)
             return nil
         }
         // filter window with this name
