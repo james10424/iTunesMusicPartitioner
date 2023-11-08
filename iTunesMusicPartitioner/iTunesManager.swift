@@ -38,6 +38,28 @@ class iTunesManager : NSObject, NSMenuDelegate {
 
         allSongs = addAllSongs(parent: statusBarMenu, insertAfter)
         startObserving()
+        
+        NSEvent.addGlobalMonitorForEvents(matching: [.keyDown]) { (event) in
+            let f16: UInt16 = 106
+            let f15: UInt16 = 113
+            let f14: UInt16 = 107
+            
+            print(event.keyCode)
+
+            switch (event.keyCode) {
+                case f16:
+                    self.play_next()
+                    break
+                case f15:
+                    self.resume()
+                    break
+                case f14:
+                    self.play_prev()
+                    break
+                default:
+                    break
+            }
+        }
     }
     
     deinit {
@@ -136,7 +158,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             i >= 0,
             let playlist = allSongs[playlistName],
             let concert = playlist.concerts[concertName],
-            i <= concert.songs.count // the first one is play all, so we have one more than actual
+            i < concert.songs.count // the first one is play all, so we have one more than actual
         else {
             return
         }
@@ -145,34 +167,6 @@ class iTunesManager : NSObject, NSMenuDelegate {
         play_song(playlistName: playlistName, concertName: concertName, time: time)
     }
 
-    func double_click() {
-        guard let window = get_ax_window() else { return }
-        var itemList: CFTypeRef?
-        let listRole = kAXOutlineRole as CFString
-        
-        if AXUIElementCopyAttributeValue(window, listRole, &itemList) != .success {
-            print("cannot copy item list")
-            return
-        }
-        var highlightedItem: CFTypeRef?
-        if AXUIElementCopyAttributeValue(itemList as! AXUIElement, kAXFocusedUIElementAttribute as CFString, &highlightedItem) != .success {
-            print("cannot copy highlighted item")
-            return
-        }
-        let position: CGPoint = CGPoint(x: 0, y: 0)
-        let doubleClickPosition = NSPointToCGPoint(NSMakePoint(position.x + 5, position.y + 5)) // Offset by a few pixels for the second click
-
-        // Create mouse events for a double-click
-        let downEvent = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition: doubleClickPosition, mouseButton: .left)
-        let upEvent = CGEvent(mouseEventSource: nil, mouseType: .leftMouseUp, mouseCursorPosition: doubleClickPosition, mouseButton: .left)
-        let doubleClick = CGEvent(mouseEventSource: nil, mouseType: .leftMouseDown, mouseCursorPosition: doubleClickPosition, mouseButton: .left)
-
-        // Post the events to simulate a double-click
-        downEvent?.post(tap: .cghidEventTap)
-        upEvent?.post(tap: .cghidEventTap)
-        doubleClick?.post(tap: .cghidEventTap)
-    }
-    
     func send_enter() {
         let running_apps = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.iTunes")
         let pid = running_apps[0].processIdentifier
@@ -197,7 +191,9 @@ class iTunesManager : NSObject, NSMenuDelegate {
             let track_tobe_played = find_itunes_concert(concertName: concertName, playlist: playlist),
             let concertIdx = track_tobe_played.index,
             let revealTrack = track_tobe_played.reveal,
-            let setPlayerPosition = iTunesPlayer.setPlayerPosition
+            let setPlayerPosition = iTunesPlayer.setPlayerPosition,
+            let play = iTunesPlayer.playpause,
+            let playerState = iTunesPlayer.playerState
         else {
             return
         }
@@ -216,6 +212,9 @@ class iTunesManager : NSObject, NSMenuDelegate {
         }
         // if the current song is the playing one, just set the time
         setPlayerPosition(Double(t))
+        if (playerState != .playing) {
+            play()
+        }
         // the song might not be the right size, we try to fit it
         if (toggleFit) {
             // there might be lag when a music started

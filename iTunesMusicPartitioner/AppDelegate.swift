@@ -116,12 +116,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         itunes_manager.startObserving()
         statusBarItem.menu?.delegate = itunes_manager
+        checkPermission()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-    
+
+    func checkPermission() {
+        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
+        let accessEnabled = AXIsProcessTrustedWithOptions(options)
+
+        if !accessEnabled {
+            print("Access Not Enabled")
+        }
+        else {
+            print("Access Enabled")
+        }
+    }
+
     @objc func songChanged(playing: Song?) {
         guard let curPlaying = playing else {
             curPlaylist?.title = "No Playlist"
