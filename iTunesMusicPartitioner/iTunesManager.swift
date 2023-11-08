@@ -51,7 +51,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
                     self.play_next()
                     break
                 case f15:
-                    self.resume()
+                    self.restart_current()
                     break
                 case f14:
                     self.play_prev()
