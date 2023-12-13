@@ -44,7 +44,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             let f15: UInt16 = 113
             let f14: UInt16 = 107
             
-            print(event.keyCode)
+//            print(event.keyCode)
 
             switch (event.keyCode) {
                 case f16:
@@ -100,11 +100,12 @@ class iTunesManager : NSObject, NSMenuDelegate {
     }
     
     func menuWillOpen(_ menu: NSMenu) {
-        startUpdateTimer()
+//        startUpdateTimer()
+        updateCurPlaying()
     }
     
     func menuDidClose(_ menu: NSMenu) {
-        stopUpdateTimer()
+//        stopUpdateTimer()
     }
     
     /**
@@ -207,14 +208,19 @@ class iTunesManager : NSObject, NSMenuDelegate {
         }
 
         if curTrackIdx != concertIdx {
+            // different concert, hit enter to play
             revealTrack()
             send_enter()
         }
+        else {
+            // same concert, check if it's paused
+            if (playerState != .playing) {
+                play()
+            }
+        }
         // if the current song is the playing one, just set the time
         setPlayerPosition(Double(t))
-        if (playerState != .playing) {
-            play()
-        }
+
         // the song might not be the right size, we try to fit it
         if (toggleFit) {
             // there might be lag when a music started
@@ -487,46 +493,59 @@ class iTunesManager : NSObject, NSMenuDelegate {
         return non_itunes_windows[0]
     }
 
-    func fit_x(_ cur_width: Int) -> Int {
+    // left |----window left-----screen center....
+    // window left + half window = screen center
+    // window left = screen center - half window
+    func fit_x(_ cur_width: Int, _ xInitial: Int) -> Int {
         // this is where x should be fitted
         // difference between their mid point
-        let width_diff = (-1024 + Int(cur_width)) / 2
-        return -1075 - width_diff
+        let screen_width = 1024
+        return xInitial + (screen_width - cur_width) / 2
     }
 
-    func fit_y(_ cur_height: Int) -> Int {
+    func fit_y(_ cur_height: Int, _ yInitial: Int) -> Int {
         // this is where x should be fitted
         // difference between their mid point
-        let height_diff = (745 - Int(cur_height)) / 2
-        return 1463 + height_diff
+        let height_diff = (745 - cur_height) / 2
+        return yInitial + height_diff
     }
 
     func fit_to_screen() {
+        let last_screen = NSScreen.screens[3]
         guard let window = get_ax_window() else { return }
         guard var size = getWindowSize(windowRef: window) else { return }
         guard let pos = getWindowPosition(windowRef: window) else { return }
+        let xInitial = Int(last_screen.frame.origin.x)
+        let yInitial = Int(-last_screen.frame.origin.y + last_screen.frame.size.height - 73)
+        let windowXdiff = abs(fit_x(Int(size.width), xInitial) - Int(pos.x))
+        let windowYdiff = abs(fit_y(Int(size.height), yInitial) - Int(pos.y))
+        print("Window pos", pos)
+        print("Window size", size)
+        print("Screen pos", last_screen.frame)
+        print("Window diff", windowXdiff, windowYdiff)
+
         // check diff to see if it's already fitted
-        if fit_x(Int(size.width)) - Int(pos.x) <= 5 && fit_y(Int(size.height)) - Int(pos.y) <= 5 {
+        if 0 <= windowXdiff && windowXdiff <= 5 && 0 <= windowYdiff && windowYdiff <= 5 {
             print("Already fitted within error")
             return
         }
         // first we go to the top right corner, expand the window
         setWindowBounds(
             window,
-            x: -1075,
-            y: 1463,
+//            x: -1075,
+//            y: 1463,
+            x: xInitial,
+            y: yInitial,
             width: 1024,
             height: 745
         )
-        // then we get the actual size, then move to the middle
+        // we get the actual size, then move to the middle
         size = getWindowSize(windowRef: window)!
 
-        // screen left: -1075, screen right: -51
-        // screen top: 1463, screen bottom: 2208 (minus the top status bar)
         setWindowBounds(
             window,
-            x: fit_x(Int(size.width)),
-            y: fit_y(Int(size.height)),
+            x: fit_x(Int(size.width), xInitial),
+            y: fit_y(Int(size.height), yInitial),
             width: Int(size.width),
             height: Int(size.height)
         )

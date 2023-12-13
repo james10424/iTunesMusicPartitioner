@@ -124,7 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     func checkPermission() {
-        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
+        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as String : true]
         let accessEnabled = AXIsProcessTrustedWithOptions(options)
 
         if !accessEnabled {

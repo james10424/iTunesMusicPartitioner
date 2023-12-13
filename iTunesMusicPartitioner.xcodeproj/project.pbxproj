@@ -468,9 +468,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iTunesMusicPartitioner/iTunesMusicPartitioner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"iTunesMusicPartitioner/Preview Content\"";
+				DEVELOPMENT_TEAM = TUGS7S6ML5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iTunesMusicPartitioner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -489,9 +491,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iTunesMusicPartitioner/iTunesMusicPartitioner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"iTunesMusicPartitioner/Preview Content\"";
+				DEVELOPMENT_TEAM = TUGS7S6ML5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iTunesMusicPartitioner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
