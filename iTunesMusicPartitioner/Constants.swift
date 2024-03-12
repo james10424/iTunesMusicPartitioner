@@ -77,7 +77,7 @@ func read_songs(fname: String) -> [JSONPlaylist]? {
     }
     do {
         let json_output = try JSONDecoder().decode([JSONPlaylist].self, from: data)
-        print(json_output)
+//        print(json_output)
         return json_output
     } catch {
         print("error parsing songs: \(error)")

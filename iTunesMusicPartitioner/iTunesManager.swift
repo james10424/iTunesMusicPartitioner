@@ -29,9 +29,11 @@ class iTunesManager : NSObject, NSMenuDelegate {
         self.prev_state = "Playing"
         self.cur_song_name = ""
         let running_apps = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.iTunes")
+//        let running_apps = NSRunningApplication.runningApplications(withBundleIdentifier: "com.launcher.iTunes")
         let pid = running_apps[0].processIdentifier
-//        self.iTunesPlayer = SBApplication(bundleIdentifier: "com.launcher.iTunes")!
         self.iTunesPlayer = SBApplication(processIdentifier: pid)!
+//        self.iTunesPlayer = SBApplication(bundleIdentifier: "com.launcher.iTunes")!
+
         self.songChanged = songChanged
         self.statusBarMenu = statusBarMenu
         super.init()
@@ -126,6 +128,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             let curPlaylist = allSongs[playing.playlistName],
             let curConcert = curPlaylist.concerts[playing.concertName]
         else {
+            print("cannot find song \(String(describing: song))")
             updateDisplay(playing: nil)
             return
         }
@@ -161,6 +164,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             let concert = playlist.concerts[concertName],
             i < concert.songs.count // the first one is play all, so we have one more than actual
         else {
+            print("invalid song selection")
             return
         }
 
@@ -196,6 +200,7 @@ class iTunesManager : NSObject, NSMenuDelegate {
             let play = iTunesPlayer.playpause,
             let playerState = iTunesPlayer.playerState
         else {
+            print("unable to get song info")
             return
         }
 

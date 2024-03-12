@@ -169,7 +169,7 @@ func addAllSongs(
     _ insertAfter: Int
 ) -> [String: Playlist] {
     // adds all songs to menu and return the mapping
-    print("All songs:", all_songs_json as Any)
+//    print("All songs:", all_songs_json as Any)
     var song_mappings: [String: Playlist] = [:]
     for playlist in all_songs_json ?? [] {
         let playlistName = playlist.name
